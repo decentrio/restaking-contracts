@@ -196,8 +196,7 @@ module middleware::registry_coordinator{
 
     fun set_operator_set_params_internal(quorum_number: u8, operator_set_params: OperatorSetParam) acquires RegistryCoordinatorStore {
         let mut_store = mut_registry_coordinator_store();
-        let mut_quorum_param = smart_table::borrow_mut(&mut mut_store.quorum_params, quorum_number);
-        *mut_quorum_param = operator_set_params;
+        smart_table::upsert(&mut mut_store.quorum_params, quorum_number, operator_set_params);
     }
 
     fun ordered_vecu8_to_bitmap(vec: vector<u8>): u256 {
