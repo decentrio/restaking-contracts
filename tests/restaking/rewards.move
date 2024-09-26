@@ -31,18 +31,24 @@ module restaking::rewards_tests {
 
     let staked_token = fungible_asset::asset_metadata(&staked_fa);
 
-    delegation_tests::deposit_into_pool(staker, staked_fa);
+    staker_manager::deposit(staker, staked_token, staked_fa);
 
     let rewarded_amount = 1000;
     let rewarded_fa = test_helpers::create_fungible_asset_and_mint(deployer, b"Reward 1", rewarded_amount);
 
     let rewarded_token = fungible_asset::asset_metadata(&rewarded_fa);
 
-    create_avs_rewards_submission(
+    let avs_token_store = primary_fungible_store::ensure_primary_store_exists(avs_addr, rewarded_token);
+
+    fungible_asset::deposit(avs_token_store, rewarded_fa);
+
+    avs_manager::create_avs_rewards_submission_for_test(
       avs,
       vector[staked_token],
       vector[1],
-      rewarded_fa,
+      rewarded_token,
+      rewarded_amount,
+      timestamp::now_seconds(),
       25 * 3600
     );
 
@@ -57,11 +63,17 @@ module restaking::rewards_tests {
 
     let rewarded_for_all_token = fungible_asset::asset_metadata(&rewarded_for_all_fa);
 
-    create_avs_rewards_for_all_submission(
+    let avs_token_for_all_store = primary_fungible_store::ensure_primary_store_exists(avs_addr, rewarded_for_all_token);
+
+    fungible_asset::deposit(avs_token_for_all_store, rewarded_for_all_fa);
+
+    avs_manager::create_avs_rewards_for_all_submission_for_test(
       avs,
       vector[staked_token],
       vector[1],
-      rewarded_for_all_fa,
+      rewarded_for_all_token,
+      rewarded_for_all_amount,
+      timestamp::now_seconds(),
       25 * 3600
     );
 

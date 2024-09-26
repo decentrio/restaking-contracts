@@ -13,6 +13,7 @@ module restaking::test_helpers {
 
   use aptos_std::aptos_hash;
 
+
   use restaking::package_manager;
   use restaking::staker_manager;
   use restaking::operator_manager;
@@ -38,13 +39,12 @@ module restaking::test_helpers {
     assert!(withdrawal::is_initialized(), 0);
     assert!(rewards_coordinator::is_initialized(), 0);
     assert!(avs_manager::is_initialized(), 0);
-    assert!(earner_manager::is_initialized(), 0);
   }
 
-  public fun create_fungible_asset(creator: &signer, name: vector<u8>): ConstructorRef {
-    let token_ctor = object::create_named_object(creator, name);
+  public fun create_fungible_asset_and_mint(creator: &signer, name: vector<u8>, amount: u64): FungibleAsset {
+    let token_ctor = &object::create_named_object(creator, name);
     primary_fungible_store::create_primary_store_enabled_fungible_asset(
-      &token_ctor,
+      token_ctor,
       option::none(),
       string::utf8(name),
       string::utf8(name),
