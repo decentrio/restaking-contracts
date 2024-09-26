@@ -1,7 +1,7 @@
 module restaking::epoch {
   use aptos_framework::timestamp;
 
-  const EPOCH_LENGTH: u64 = 3600;
+  const EPOCH_LENGTH: u64 = 1;
 
   inline fun get_epoch_from_time(time: u64): u64 {
     time / EPOCH_LENGTH

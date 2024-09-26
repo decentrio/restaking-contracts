@@ -5,13 +5,11 @@ authors = []
 
 [addresses]
 aptos_framework = "0x1"
-deployer = "_"
-restaking = "_"
-middleware = "_"
+deployer = "0x6d472c682150b39f7f23bae356f898aca1b18b842fc5b254b6ed8f9efce9137f"
+restaking = "0x5af42aafeaf5df14b8f5ebe9cba7ff38631d17d9c15db14e323cd03232069e76"
 
 [dev-addresses]
-deployer = "0xcafe"
-middleware = "0xabcfff"
+# deployer = "0xcafe"
 restaking = "0xc3bb8488ab1a5815a9d543d7e41b0e0df46a7396f89b22821f07a4362f75ddc5"
 
 [dependencies.AptosFramework]

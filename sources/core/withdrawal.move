@@ -87,7 +87,7 @@ module restaking::withdrawal {
         package_manager::add_address(string::utf8(WITHDRAWAL_NAME), signer::address_of(&withdrawal_signer));
         move_to(&withdrawal_signer, WithdrawalConfigs {
             signer_cap,
-            min_withdrawal_delay: 24 * 3600, // 1 day
+            min_withdrawal_delay: 10, // 10s
             pending_withdrawals: smart_table::new(),
             token_withdrawal_delay: smart_table::new()
         });
@@ -105,7 +105,7 @@ module restaking::withdrawal {
 
   public entry fun undelegate(sender: &signer, staker: address) acquires WithdrawalConfigs{
     let operator = staker_manager::undelegate(sender, staker);
-    let (tokens, token_shares) = staker_manager::staker_nonormalized_shares(staker);
+    let (tokens, token_shares) = staker_manager::staker_nonnormalized_shares(staker);
 
     if(vector::length(&tokens) > 0){
       remove_shares_and_queue_withdrawal(
