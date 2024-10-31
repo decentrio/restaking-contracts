@@ -6,7 +6,7 @@ authors = []
 [addresses]
 aptos_framework = "0x1"
 deployer = "0x1efa8b2fc5b2c5d9124868881b8dd6052a7d43e64cf2561c57946e1244864658"
-restaking = "0x06b37553a5d2a5b53d5189b90cd5053d67d918490c9a77c26d2b24264ebce76c"
+restaking = "0x9043645412966f87e3521c1cb796ad8ea1a5ecaf0f488da8d2c96b664da9dd00"
 
 [dev-addresses]
 # deployer = "0xcafe"
